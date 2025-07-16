@@ -2,13 +2,9 @@ import { NextResponse } from "next/server";
 import { api } from "@/app/api/api";
 import { cookies } from "next/headers";
 
-type Props = {
-  params: { id: string };
-};
-
-export async function GET(_: Request, { params }: Props) {
+export async function GET(_: Request, context: { params: { id: string } }) {
   const cookieStore = cookies();
-  const { id } = params;
+  const { id } = context.params;
 
   try {
     const { data } = await api(`/notes/${id}`, {
@@ -27,9 +23,9 @@ export async function GET(_: Request, { params }: Props) {
   }
 }
 
-export async function DELETE(_: Request, { params }: Props) {
+export async function DELETE(_: Request, context: { params: { id: string } }) {
   const cookieStore = cookies();
-  const { id } = params;
+  const { id } = context.params;
 
   try {
     await api.delete(`/notes/${id}`, {
@@ -51,9 +47,12 @@ export async function DELETE(_: Request, { params }: Props) {
   }
 }
 
-export async function PATCH(request: Request, { params }: Props) {
+export async function PATCH(
+  request: Request,
+  context: { params: { id: string } }
+) {
   const cookieStore = cookies();
-  const { id } = params;
+  const { id } = context.params;
   const body = await request.json();
 
   try {
