@@ -1,6 +1,6 @@
 "use client";
 
-import { fetchNotes } from "@/lib/api";
+import { fetchNotes } from "@/lib/api/clientApi";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { useDebounce } from "use-debounce";
@@ -23,7 +23,7 @@ export default function NotesClient({ initialData, tag }: Props) {
 
   const allNotes = useQuery({
     queryKey: ["allNotes", debouncedQuery, page, tag],
-    queryFn: () => fetchNotes(page, debouncedQuery, tag),
+    queryFn: () => fetchNotes(debouncedQuery, page, 16, tag),
     placeholderData: keepPreviousData,
     refetchOnMount: false,
     initialData: page === 1 && search === "" ? initialData : undefined,

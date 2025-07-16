@@ -1,6 +1,7 @@
-import Link from 'next/link';
-import css from './Header.module.css';
-import TagsMenu from '../TagsMenu/TagsMenu';
+import Link from "next/link";
+import css from "./Header.module.css";
+import TagsMenu from "../TagsMenu/TagsMenu";
+import AuthNavigation from "../AuthNavigation/AuthNavigation";
 
 export default async function Header() {
   return (
@@ -13,6 +14,9 @@ export default async function Header() {
           <li>
             <Link href="/">Home</Link>
           </li>
+
+          <AuthNavigation />
+
           <li>
             <TagsMenu />
           </li>

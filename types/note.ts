@@ -13,3 +13,9 @@ export interface NewNote {
   content?: string;
   tag: NoteTag;
 }
+export interface NotesResponse {
+  notes: Note[];
+  page: number;
+  totalPages: number;
+  tag: string;
+}

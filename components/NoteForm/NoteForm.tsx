@@ -6,9 +6,9 @@ import { useId } from "react";
 import css from "./NoteForm.module.css";
 import type { NewNote } from "@/types/note";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createNote } from "@/lib/api";
+import { createNote } from "@/lib/api/clientApi";
 import { FormSchema } from "@/YupSchemes/FormSchema";
-import { useNoteStore } from "@/lib/store/noteStore";
+import { useNoteDraftStore } from "@/lib/store/noteStore";
 import { useRouter } from "next/navigation";
 interface NoteFormProps {
   onClose?: () => void;
@@ -19,7 +19,7 @@ export default function NoteForm({ onClose }: NoteFormProps) {
   const queryClient = useQueryClient();
   const router = useRouter();
 
-  const { draft, setDraft, clearDraft } = useNoteStore();
+  const { draft, setDraft, clearDraft } = useNoteDraftStore();
 
   const addNote = useMutation({
     mutationFn: createNote,
