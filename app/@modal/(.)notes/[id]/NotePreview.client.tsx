@@ -22,7 +22,7 @@ export default function NotePreviewClient({ id }: NotePreviewClientProps) {
     error,
   } = useQuery({
     queryKey: ["note", noteId],
-    queryFn: () => fetchNoteById(Number(noteId)),
+    queryFn: () => fetchNoteById(String(noteId)),
     refetchOnMount: false,
   });
 
