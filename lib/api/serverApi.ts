@@ -1,4 +1,4 @@
-import { nextServer } from "./api";
+import { api } from "./api";
 import { cookies } from "next/headers";
 import { User } from "@/types/user";
 import type { Note, NotesResponse } from "@/types/note";
@@ -13,7 +13,7 @@ const getHeaders = (): { Cookie: string } => {
 };
 
 export const getUserFromServer = async (): Promise<User> => {
-  const { data } = await nextServer.get<User>("/users/me", {
+  const { data } = await api.get<User>("/users/me", {
     headers: getHeaders(),
   });
   return data;
@@ -22,13 +22,13 @@ export const getUserFromServer = async (): Promise<User> => {
 export const checkServerSession = async (): Promise<
   AxiosResponse<CheckSessionResponse>
 > => {
-  return nextServer.get("/auth/session", {
+  return api.get("/auth/session", {
     headers: getHeaders(),
   });
 };
 
 export const fetchNoteByIdServer = async (id: number): Promise<Note> => {
-  const { data } = await nextServer.get<Note>(`/notes/${id}`, {
+  const { data } = await api.get<Note>(`/notes/${id}`, {
     headers: getHeaders(),
   });
   return data;
@@ -40,7 +40,7 @@ export const fetchNotesServer = async (
   perPage = 10,
   tag?: string
 ): Promise<NotesResponse> => {
-  const { data } = await nextServer.get<NotesResponse>("/notes", {
+  const { data } = await api.get<NotesResponse>("/notes", {
     params: {
       ...(searchText && { search: searchText }),
       page,
