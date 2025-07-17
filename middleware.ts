@@ -69,14 +69,9 @@ export async function middleware(request: NextRequest) {
   }
 
   if (accessToken) {
-    if (pathname === "/sign-up") {
-      return NextResponse.next();
-    }
-
     if (isPublicRoute) {
       return NextResponse.redirect(new URL("/", request.url));
     }
-
     return NextResponse.next();
   }
 

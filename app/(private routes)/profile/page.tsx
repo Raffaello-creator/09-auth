@@ -1,6 +1,26 @@
 import { getUserFromServer } from "@/lib/api/serverApi";
 import Image from "next/image";
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Profile | NoteHub",
+  description: "Your personal profile page in NoteHub.",
+  openGraph: {
+    title: "Profile | NoteHub",
+    description: "Your personal profile page in NoteHub.",
+    images: [
+      {
+        url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
+        width: 1200,
+        height: 630,
+        alt: "404 - Page not found",
+      },
+    ],
+    siteName: "NoteHub",
+    url: "https://09-auth-beige.vercel.app/not-found",
+  },
+};
 
 const ProfilePage = async () => {
   const user = await getUserFromServer();

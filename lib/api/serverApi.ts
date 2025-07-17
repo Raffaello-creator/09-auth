@@ -5,8 +5,8 @@ import type { Note, NotesResponse } from "@/types/note";
 import type { AxiosResponse } from "axios";
 import type { CheckSessionResponse } from "@/types/user";
 
-const getHeaders = (): { Cookie: string } => {
-  const cookieStore = cookies();
+const getHeaders = async (): Promise<{ Cookie: string }> => {
+  const cookieStore = await cookies();
   return {
     Cookie: cookieStore.toString(),
   };
@@ -14,7 +14,7 @@ const getHeaders = (): { Cookie: string } => {
 
 export const getUserFromServer = async (): Promise<User> => {
   const { data } = await api.get<User>("/users/me", {
-    headers: getHeaders(),
+    headers: await getHeaders(),
   });
   return data;
 };
@@ -23,13 +23,13 @@ export const checkServerSession = async (): Promise<
   AxiosResponse<CheckSessionResponse>
 > => {
   return api.get("/auth/session", {
-    headers: getHeaders(),
+    headers: await getHeaders(),
   });
 };
 
-export const fetchNoteByIdServer = async (id: number): Promise<Note> => {
+export const fetchNoteByIdServer = async (id: string): Promise<Note> => {
   const { data } = await api.get<Note>(`/notes/${id}`, {
-    headers: getHeaders(),
+    headers: await getHeaders(),
   });
   return data;
 };
@@ -47,7 +47,7 @@ export const fetchNotesServer = async (
       perPage,
       ...(tag && tag !== "All" && { tag }),
     },
-    headers: getHeaders(),
+    headers: await getHeaders(),
   });
   return data;
 };

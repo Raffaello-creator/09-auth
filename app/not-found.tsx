@@ -16,7 +16,7 @@ export const metadata: Metadata = {
       },
     ],
     siteName: "NoteHub",
-    url: "https://08-zustand-lake-chi.vercel.app/not-found",
+    url: "https://09-auth-beige.vercel.app/not-found",
   },
 };
 
