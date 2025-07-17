@@ -13,7 +13,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
-  const note = await fetchNoteByIdServer(Number(id));
+  const note = await fetchNoteByIdServer(String(id));
 
   const title = `Note: ${note.title}`;
   const description = note.content.slice(0, 30);
@@ -43,7 +43,7 @@ export default async function NoteDetails({ params }: Props) {
 
   await queryClient.prefetchQuery({
     queryKey: ["note", id],
-    queryFn: () => fetchNoteByIdServer(Number(id)),
+    queryFn: () => fetchNoteByIdServer(String(id)),
   });
 
   return (
