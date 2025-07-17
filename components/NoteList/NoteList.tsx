@@ -29,7 +29,7 @@ export default function NoteList({ items }: Props) {
         <NoteItem
           key={el.id}
           item={el}
-          removeItem={removeItem}
+          removeItem={() => removeItem(el.id)}
           isPending={isPending}
         />
       ))}

@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { Note } from '@/types/note';
-import css from '../NoteList/NoteList.module.css';
-import Link from 'next/link';
+import { Note } from "@/types/note";
+import css from "../NoteList/NoteList.module.css";
+import Link from "next/link";
 
 type Props = {
   item: Note;
+  removeItem: (id: string) => void;
   isPending: boolean;
-  removeItem: (id: number) => void;
 };
 
 export default function NoteItem({ item, isPending, removeItem }: Props) {
